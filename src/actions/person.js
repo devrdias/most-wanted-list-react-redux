@@ -1,9 +1,18 @@
 import newToast from './newToast';
+import axios from 'axios';
 
+// =======
+// ACTIONS
+// =======
 export const ADD_PERSON = 'ADD_PERSON';
 export const UPDATE_PERSON = 'UPDATE_PERSON';
 export const DELETE_PERSON = 'DELETE_PERSON';
+export const GET_PERSON_LIST = 'GET_PERSON_LIST';
 
+
+// ================
+// ACTIONS CREATORS
+// ================
 
 // ADD PERSON
 export const addPerson = person => {
@@ -14,7 +23,6 @@ export const addPerson = person => {
         dispatch(newToast(message));
     };
 }
-
 const addPersonAsync = person => {
     return {
         type: ADD_PERSON,
@@ -31,7 +39,6 @@ export const updatePerson = person => {
         dispatch(newToast(message));
     };
 }
-
 const updatePersonAsync = person => {
     return {
         type: UPDATE_PERSON,
@@ -40,7 +47,6 @@ const updatePersonAsync = person => {
 }
 
 // DELETE PERSON
-
 export const deletePerson = person => {
     const message = `You've just deleted ${person.name} from Most Wanted List.`;
 
@@ -49,10 +55,30 @@ export const deletePerson = person => {
         dispatch(newToast(message));
     };
 }
-
 const deletePersonAsync = person => {
     return {
         type: DELETE_PERSON,
         payload: person.id
     };
+}
+
+// GET PERSON LIST ARRAY
+export const getPersonList = () => {
+    return dispatch => {
+        axios.get('../person_list.json')
+            .then(res => {
+                console.log('Person list ::', res.data);
+                const people = res.data.map(person => {
+                    person.note = 'none';
+                    return person;
+                });
+                dispatch(getPersonListAsync(people));
+            });
+    }
+}
+const getPersonListAsync = people => {
+    return {
+        type: GET_PERSON_LIST,
+        payload: people
+    }
 }

@@ -1,6 +1,12 @@
+// =======
+// ACTIONS
+// =======
 export const NEW_TOAST = 'NEW_TOAST';
 export const CLEAR_TOAST = 'CLEAR_TOAST';
 
+// ================
+// ACTIONS CREATORS
+// ================
 
 // NEW TOAST
 export const newToast = message => {
@@ -8,7 +14,6 @@ export const newToast = message => {
         dispatch(newToastAsync(message));
     }
 }
-
 const newToastAsync = message => {
     return {
         type: NEW_TOAST,
@@ -23,7 +28,6 @@ export const clearToast = () => {
         dispatch(clearToastAsync())
     };
 }
-
 const clearToastAsync = () => {
     return {
         type: CLEAR_TOAST,
