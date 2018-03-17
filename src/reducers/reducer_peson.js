@@ -1,7 +1,6 @@
 import { ADD_PERSON, DELETE_PERSON, UPDATE_PERSON, GET_PERSON_LIST } from '../actions/person';
 
-
-const person = ({ state = null, action }) => {
+const person  = (state = null, action) => {
     switch (action.type) {
         case ADD_PERSON:
             return [action.payload, ...state];
@@ -20,6 +19,8 @@ const person = ({ state = null, action }) => {
             return action.payload;
 
         default:
-            state;
+            return state;
     }
 }
+
+export default person;

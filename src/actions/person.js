@@ -1,4 +1,4 @@
-import newToast from './newToast';
+import { newToast } from './toast';
 import axios from 'axios';
 
 // =======
